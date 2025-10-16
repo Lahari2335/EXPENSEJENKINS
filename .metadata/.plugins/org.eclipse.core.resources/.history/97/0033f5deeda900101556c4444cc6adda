@@ -1,0 +1,28 @@
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "expense_table")
+public class Expense {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // <--- Add this
+    @Column(name = "expense_id")
+    private int id;
+
+    @Column(name = "expense_title", nullable = false, length = 100)
+    private String title;
+
+    @Column(name = "expense_category", nullable = false, length = 50)
+    private String category;
+
+    @Column(name = "expense_amount", nullable = false)
+    private double amount;
+
+    @Column(name = "expense_date", nullable = false, length = 20)
+    private String date;
+
+    @Column(name = "expense_notes", length = 255)
+    private String notes;
+
+    // Getters & Setters (unchanged)
+}

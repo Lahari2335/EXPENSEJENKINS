@@ -1,0 +1,26 @@
+package com.klef.dev.controller;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.klef.dev.entity.Expense;
+import com.klef.dev.service.ExpenseServiceImpl;
+
+@RestController
+@RequestMapping("/expenseapi")
+@CrossOrigin(origins = "http://localhost:3000")
+public class ExpenseController {
+
+    @Autowired
+    private ExpenseServiceImpl service;
+
+    @PostMapping("/add")
+    public Expense addExpense(@RequestBody Expense expense) {
+        return service.addExpense(expense);
+    }
+
+    @GetMapping("/all")
+    public List<Expense> getAllExpenses() {
+        return service.getAllExpenses();
+    }
+}
