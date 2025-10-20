@@ -9,7 +9,8 @@ const ExpenseManager = () => {
   const [editingId, setEditingId] = useState(null);
   const [search, setSearch] = useState("");
 
-  const baseUrl = "/expensespring/expenseapi";
+  const baseUrl = "http://localhost:2030/expensespring/expenseapi";
+
 
   useEffect(() => {
     fetchAllExpenses();
