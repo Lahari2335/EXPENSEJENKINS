@@ -15,7 +15,7 @@
     <artifactId>EXPENSER-SPRINGBOOT</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ExpenserSpringBoot</name>
-    <description>Playlist Management API with Spring Boot</description>
+    <description>Expense Manager API with Spring Boot</description>
     <packaging>war</packaging>
 
     <properties>
@@ -33,6 +33,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- Provided Tomcat for external deployment -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Database -->
         <dependency>
             <groupId>com.mysql</groupId>
@@ -40,7 +47,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Lombok (to reduce boilerplate code) -->
+        <!-- Lombok (optional) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -64,7 +71,7 @@
     </dependencies>
 
     <build>
-		<finalName>expensespring</finalName>
+        <finalName>expensespring</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
