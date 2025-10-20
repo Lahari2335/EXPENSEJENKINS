@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.klef.dev.entity.Expense;
 import com.klef.dev.service.ExpenseService;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/expenseapi")
 public class ExpenseController {
