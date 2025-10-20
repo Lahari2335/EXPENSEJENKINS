@@ -1,5 +1,6 @@
 const config = {
-  url: "/expensespring/expenseapi"
+  url: "http://localhost:2030/expensespring/expenseapi";
+
 };
 
 export default config;
