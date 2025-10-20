@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.klef.dev.entity.Expense;
 import com.klef.dev.repository.ExpenseRepository;
 
-@Service  // <-- THIS IS REQUIRED
+@Service
 public class ExpenseService {
 
     @Autowired
@@ -26,5 +26,9 @@ public class ExpenseService {
 
     public void deleteExpense(int id) {
         expenseRepository.deleteById(id);
+    }
+
+    public List<Expense> searchExpenses(String keyword) {
+        return expenseRepository.searchExpenses(keyword);
     }
 }

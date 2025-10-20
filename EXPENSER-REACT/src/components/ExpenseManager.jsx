@@ -7,6 +7,7 @@ const ExpenseManager = () => {
   const [expense, setExpense] = useState({ title: "", category: "", amount: "", date: "", notes: "" });
   const [message, setMessage] = useState("");
   const [editingId, setEditingId] = useState(null);
+  const [search, setSearch] = useState("");
 
   const baseUrl = "http://localhost:2001/expenseapi";
 
@@ -61,9 +62,37 @@ const ExpenseManager = () => {
     setEditingId(exp.id);
   };
 
+  // ✅ NEW: Search Expenses
+  const handleSearch = async (e) => {
+    const keyword = e.target.value;
+    setSearch(keyword);
+
+    if (keyword.trim() === "") {
+      fetchAllExpenses();
+      return;
+    }
+
+    try {
+      const res = await axios.get(`${baseUrl}/search?keyword=${keyword}`);
+      setExpenses(res.data);
+    } catch (err) {
+      console.error(err);
+      setMessage("Search failed");
+    }
+  };
+
   return (
     <div className="container">
       <h1>Expense Manager</h1>
+
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search by title, category, or notes"
+        value={search}
+        onChange={handleSearch}
+        className="search-bar"
+      />
 
       <div className="form">
         <input type="text" name="title" placeholder="Title" value={expense.title} onChange={handleChange} />
@@ -78,13 +107,17 @@ const ExpenseManager = () => {
 
       <h2>All Expenses</h2>
       <ul>
-        {expenses.map((exp) => (
-          <li key={exp.id}>
-            <strong>{exp.title}</strong> — ₹{exp.amount} ({exp.category}) on {exp.date}
-            <button onClick={() => editExpense(exp)}>Edit</button>
-            <button onClick={() => deleteExpense(exp.id)}>Delete</button>
-          </li>
-        ))}
+        {expenses.length > 0 ? (
+          expenses.map((exp) => (
+            <li key={exp.id}>
+              <strong>{exp.title}</strong> :  {exp.amount}/-  ({exp.category}) on {exp.date}
+              <button onClick={() => editExpense(exp)}>Edit</button>
+              <button onClick={() => deleteExpense(exp.id)}>Delete</button>
+            </li>
+          ))
+        ) : (
+          <p>No expenses found.</p>
+        )}
       </ul>
     </div>
   );
